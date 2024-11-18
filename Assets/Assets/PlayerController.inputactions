@@ -1,0 +1,67 @@
+{
+    "name": "PlayerController",
+    "maps": [
+        {
+            "name": "New action map",
+            "id": "645f3669-6a20-4519-98cf-95d553501538",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "88f45e2f-fac5-42fa-8eca-88e368cc0cf0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ea389e89-f65a-4995-ab15-7f6dc5aafc4f",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1245f277-35d0-435e-9b40-1cabfd9e569e",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "38ef0660-16c1-4405-982b-d980693a8c81",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d54fed6a-e87f-42e2-84d7-b015552c9f1e",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
