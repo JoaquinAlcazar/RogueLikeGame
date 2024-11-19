@@ -3312,7 +3312,7 @@ GameObject:
   - component: {fileID: 1175777304}
   m_Layer: 0
   m_Name: walk_41
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3378,7 +3378,7 @@ Transform:
   m_GameObject: {fileID: 1175777300}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8069658, y: -0.3125027, z: 0}
+  m_LocalPosition: {x: -3.91, y: -1.67, z: 0}
   m_LocalScale: {x: 8.124981, y: 8.124981, z: 8.124981}
   m_ConstrainProportionsScale: 0
   m_Children: []
