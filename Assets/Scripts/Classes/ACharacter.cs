@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ACharacter : MonoBehaviour
+public class ACharacter : ScriptableObject
 {
     private int HP;
     private int maxHP;
