@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AEnemy : ACharacter
 {
-    private int goldDrop;
-    private int expDrop;
+    public int goldDrop;
+    public int expDrop;
     // Start is called before the first frame update
     void Start()
     {

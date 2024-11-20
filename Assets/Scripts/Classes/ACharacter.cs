@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ACharacter : ScriptableObject
+public class ACharacter : MonoBehaviour
 {
-    private int HP;
-    private int maxHP;
+    public int HP;
+    public int maxHP;
     // Start is called before the first frame update
     void Start()
     {
