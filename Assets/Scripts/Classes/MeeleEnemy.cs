@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class MeeleEnemy : AEnemy
 {
@@ -8,8 +9,7 @@ public class MeeleEnemy : AEnemy
     public float speed;
     private float initialSpeed;
     private Transform playerPos;
-    private Ray ray;
-    private RaycastHit hit;
+    private Vector3 direction;
     private CircleCollider2D explosionCollider;
 
     private LineRenderer lineRenderer;
@@ -21,23 +21,24 @@ public class MeeleEnemy : AEnemy
         initialSpeed = speed;
         explosionCollider = GetComponent<CircleCollider2D>();
         explosionCollider.radius = explosionRange;
-        explosionCollider.enabled = false;             
+        explosionCollider.enabled = false;    
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, playerPos.position, Time.deltaTime * speed);
-        ray = new Ray(transform.position, playerPos.position);
+        direction = (playerPos.position - transform.position).normalized;
+        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100))
+        Debug.DrawRay(transform.position, direction * explosionRange, Color.green);
+        Physics.Raycast(transform.position, direction, out hit, explosionRange);
+            
+        if (hit.transform == playerPos)
         {
             Debug.Log("Hit");
-            if (hit.transform.tag == "Player")
-            {
-                speed = 0;
-                StartCoroutine(Explode());
-            }
+            speed = 0;
+            StartCoroutine(Explode());
         }
     }
 
