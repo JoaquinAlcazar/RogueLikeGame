@@ -6,18 +6,19 @@ public class Grenade : AProjectile
 {
     public float explosionRange;
     public CircleCollider2D circleCollider;
-    private Animator animator;
+    private Animation animator;
     public AnimationClip clip;
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animation>();
         circleCollider = GetComponent<CircleCollider2D>();
         circleCollider.isTrigger = true;
         circleCollider.enabled = false;
-        new StartCoroutine(Explode());
+        animator.AddClip(clip, clip.name);
+        StartCoroutine(Explode());
     }
 
     // Update is called once per frame
@@ -28,14 +29,16 @@ public class Grenade : AProjectile
 
     IEnumerator Explode()
     {
-        new WaitForSeconds(3);
+        yield return new WaitForSeconds(3);
         spriteRenderer.enabled = false;
         circleCollider.enabled = false;
-        return null;
+        PlayExplosionClip();
+        yield return new WaitForSeconds(clip.length);
+        Destroy(gameObject);
     }
 
     void PlayExplosionClip()
     {
-        animator.Play("GrenadeExplosion");
+        animator.Play(clip.name);
     }
 }

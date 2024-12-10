@@ -33,7 +33,7 @@ public class MeeleEnemy : AEnemy
 
         Debug.DrawRay(transform.position, direction * explosionRange, Color.green);
         Physics.Raycast(transform.position, direction, out hit, explosionRange);
-            
+             
         if (hit.transform == playerPos)
         {
             Debug.Log("Hit");
