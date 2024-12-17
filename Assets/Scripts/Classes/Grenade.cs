@@ -16,6 +16,7 @@ public class Grenade : AProjectile
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.transform.SetParent(null);
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         circleCollider = GetComponent<CircleCollider2D>();
@@ -25,8 +26,11 @@ public class Grenade : AProjectile
         circleCollider.enabled = false;
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f; // Asegúrate de que Z sea 0 para 2D
+        mousePosition.z = 0f;
         launchDirection = (mousePosition - transform.position).normalized;
+
+        float angle = Mathf.Atan2(launchDirection.y, launchDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
         StartCoroutine(Explode());
     }
@@ -45,7 +49,7 @@ public class Grenade : AProjectile
     {
         yield return new WaitForSeconds(3);
         spriteRenderer.sprite = null;
-        circleCollider.enabled = false;
+        circleCollider.enabled = true;
         PlayExplosionClip();
         yield return new WaitForSeconds(0.6f);
         Destroy(gameObject);

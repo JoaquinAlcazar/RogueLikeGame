@@ -138,11 +138,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c923dbdda71454183446c7c01ce9b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 0
+  HP: 1
   maxHP: 0
   goldDrop: 0
   expDrop: 0
-  explosionRange: 2
+  explosionRange: 0.4
   speed: 3
 --- !u!61 &3330576689055863911
 BoxCollider2D:

@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    private int damage;
-    private float useSpeed;
-    // Start is called before the first frame update
+    protected int damage;
+    protected float useSpeed;
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+       
     }
 
     void Attack()

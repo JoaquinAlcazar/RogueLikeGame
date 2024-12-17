@@ -11,7 +11,7 @@ public class MeeleEnemy : AEnemy
     private Transform playerPos;
     private Vector3 direction;
     private CircleCollider2D explosionCollider;
-
+    private RaycastHit hit;
     private LineRenderer lineRenderer;
 
     // Start is called before the first frame update
@@ -21,34 +21,42 @@ public class MeeleEnemy : AEnemy
         initialSpeed = speed;
         explosionCollider = GetComponent<CircleCollider2D>();
         explosionCollider.radius = explosionRange;
-        explosionCollider.enabled = false;    
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+
+        if (HP < 1) Destroy(gameObject);
+    }
+    private void FixedUpdate()
+    {
         transform.position = Vector3.MoveTowards(transform.position, playerPos.position, Time.deltaTime * speed);
         direction = (playerPos.position - transform.position).normalized;
-        RaycastHit hit;
+        Vector3 rayOrigin = transform.position + direction * 1f;
 
-        Debug.DrawRay(transform.position, direction * explosionRange, Color.green);
-        Physics.Raycast(transform.position, direction, out hit, explosionRange);
-             
-        if (hit.transform == playerPos)
-        {
-            Debug.Log("Hit");
-            speed = 0;
-            StartCoroutine(Explode());
-        }
+        Debug.DrawRay(rayOrigin, direction * explosionRange, Color.green);
+        if (Physics.Raycast(rayOrigin, direction * explosionRange, out hit, explosionRange)) Debug.Log(hit.transform.tag);
     }
 
     IEnumerator Explode()
     {
+        speed = 0;
         new WaitForSeconds(2);
         explosionCollider.enabled = true;
         yield return StartCoroutine(explosionAnimation());
         Destroy(gameObject);
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "PlayerProjectile") HP -= 1;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "PlayerProjectile") HP -= 1;
     }
 
     IEnumerator explosionAnimation()
