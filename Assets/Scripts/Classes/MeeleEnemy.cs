@@ -37,7 +37,7 @@ public class MeeleEnemy : AEnemy
         Vector3 rayOrigin = transform.position + direction * 1f;
 
         Debug.DrawRay(rayOrigin, direction * explosionRange, Color.green);
-        if (Physics.Raycast(rayOrigin, direction * explosionRange, out hit, explosionRange)) Debug.Log(hit.transform.tag);
+        if (Physics.Raycast(rayOrigin, direction * explosionRange, out hit, explosionRange)) Debug.Log(hit.transform.tag); 
     }
 
     IEnumerator Explode()
@@ -56,6 +56,7 @@ public class MeeleEnemy : AEnemy
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Enemy hurt");
         if (collision.gameObject.tag == "PlayerProjectile") HP -= 1;
     }
 

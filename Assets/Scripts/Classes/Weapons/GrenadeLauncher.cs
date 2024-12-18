@@ -10,7 +10,6 @@ public class GrenadeLauncher : Weapon
     private bool inCD;
     void Start()
     {
-
         inCD = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
