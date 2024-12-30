@@ -29,7 +29,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    protected void rotate()
+    protected virtual void rotate()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
