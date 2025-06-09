@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - PlayerProjectile
+  - EnemyProjectile
+  - Wall
+  - Obstacle
+  - Trigger
   layers:
   - Default
   - TransparentFX
@@ -11,10 +17,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - PlayerProjectile
+  - Enemy
+  - Player
+  - Trigger
   - 
   - 
   - 
