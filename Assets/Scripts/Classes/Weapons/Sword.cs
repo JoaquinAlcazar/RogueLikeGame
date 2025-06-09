@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Sword : Weapon
@@ -6,6 +7,11 @@ public class Sword : Weapon
     private SpriteRenderer spriteRenderer;
 
     public float pushForce = 5f;
+    public int swordDamage = 25;
+    public float damageCooldown = 0.2f; // Tiempo mínimo entre golpes al mismo enemigo
+
+    // Diccionario para guardar enemigos golpeados y el tiempo del último golpe
+    private Dictionary<ACharacter, float> hitEnemiesCooldown = new Dictionary<ACharacter, float>();
 
     void Start()
     {
@@ -13,7 +19,7 @@ public class Sword : Weapon
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    //La espada necesita hacer override para agregar un desplazamiento hacia adelante constamente para darle el efecto que quería darle.
+    // La espada necesita hacer override para agregar un desplazamiento hacia adelante constantemente para darle el efecto que quería darle.
     protected override void rotate()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -31,16 +37,49 @@ public class Sword : Weapon
         }
     }
 
+    private void Update()
+    {
+        // Limpiar enemigos cuyo cooldown ya expiró
+        List<ACharacter> toRemove = new List<ACharacter>();
+        foreach (var entry in hitEnemiesCooldown)
+        {
+            if (Time.time - entry.Value > damageCooldown)
+            {
+                toRemove.Add(entry.Key);
+            }
+        }
+        foreach (var enemy in toRemove)
+        {
+            hitEnemiesCooldown.Remove(enemy);
+        }
+        rotate();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        EnemyHitbox hitbox = other.GetComponent<EnemyHitbox>();
+        if (hitbox != null && hitbox.owner != null)
         {
-            Rigidbody2D enemyRigidbody = other.GetComponent<Rigidbody2D>();
+            ACharacter enemy = hitbox.owner;
+
+            // Verificar cooldown para no hacer daño repetido en poco tiempo
+            if (hitEnemiesCooldown.ContainsKey(enemy))
+                return;
+
+            // Aplicar fuerza de empuje
+            Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();
             if (enemyRigidbody != null)
             {
-                Vector2 pushDirection = (other.transform.position - transform.position).normalized;
+                Vector2 pushDirection = (hitbox.transform.position - transform.position).normalized;
                 enemyRigidbody.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
             }
+
+            // Aplicar daño
+            enemy.TakeDamage(swordDamage);
+            Debug.Log($"Sword dealt {swordDamage} damage to {enemy.gameObject.name}.");
+
+            // Registrar el golpe con tiempo actual
+            hitEnemiesCooldown[enemy] = Time.time;
         }
     }
 }

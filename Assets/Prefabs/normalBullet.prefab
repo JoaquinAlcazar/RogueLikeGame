@@ -50,6 +50,7 @@ MonoBehaviour:
   timeAlive: 3
   launchDirection: {x: 0, y: 0, z: 0}
   speed: 0.3
+  bulletDamage: 40
 --- !u!212 &9215894483164818089
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -90,7 +91,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 1d2e8434d2fc3014d965811ddc0d997a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

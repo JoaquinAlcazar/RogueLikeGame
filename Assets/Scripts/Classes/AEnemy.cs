@@ -6,20 +6,15 @@ public class AEnemy : ACharacter
 {
     public int goldDrop;
     public int expDrop;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    // Método protegido virtual -> las subclases pueden sobrescribirlo o llamarlo tal cual.
+    protected virtual void Drop()
     {
-        
-    }
+        Debug.Log($"Dropped {goldDrop} gold and {expDrop} experience.");
 
-    void Drop(int goldDrop, int expDrop)
-    {
-
+        // TODO: Aquí puedes implementar:
+        // - Añadir oro al jugador.
+        // - Añadir experiencia al jugador.
+        // - Spawnear objetos de oro o experiencia en el mundo.
     }
 }

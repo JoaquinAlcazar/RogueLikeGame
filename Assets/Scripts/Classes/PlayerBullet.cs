@@ -7,12 +7,23 @@ public class PlayerBullet : Bullet
     public int timeAlive;
     public Vector3 launchDirection;
     public float speed;
-    // Start is called before the first frame update
+    public int bulletDamage = 40; 
+
     void Start()
     {
         gameObject.transform.SetParent(null);
+
+        Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
+        Collider2D bulletCollider = GetComponent<Collider2D>();
+
+        if (playerCollider != null && bulletCollider != null)
+        {
+            Physics2D.IgnoreCollision(playerCollider, bulletCollider);
+        }
+
         Debug.Log("Bullet creado");
         StartCoroutine(autodestruction());
+
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
         launchDirection = (mousePosition - transform.position).normalized;
@@ -21,17 +32,32 @@ public class PlayerBullet : Bullet
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        transform.position = transform.position + new Vector3((launchDirection.x*speed), (launchDirection.y * speed), 0);
+        transform.position += new Vector3(launchDirection.x * speed, launchDirection.y * speed, 0);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        EnemyHitbox hitbox = collision.collider.GetComponent<EnemyHitbox>();
+        if (hitbox != null && hitbox.owner != null)
+        {
+            hitbox.owner.TakeDamage(bulletDamage);
+            Debug.Log($"Bullet dealt {bulletDamage} damage to {hitbox.owner.gameObject.name}.");
+        }
+
         Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        EnemyHitbox hitbox = collision.GetComponent<EnemyHitbox>();
+        if (hitbox != null && hitbox.owner != null)
+        {
+            hitbox.owner.TakeDamage(bulletDamage);
+            Debug.Log($"Bullet dealt {bulletDamage} damage to {hitbox.owner.gameObject.name}.");
+        }
+
         Destroy(gameObject);
     }
 

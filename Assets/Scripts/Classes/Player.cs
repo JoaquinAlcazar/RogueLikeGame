@@ -1,27 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 public class Player : ACharacter
 {
-    public Inventory inventory;
-    public int gold;
-    public int exp;
-    public int nextLevelExp;
-    public int keys;
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
+        // Puedes inicializar cosas propias del Player aquí
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Die()
     {
-        
-    }
-
-    void Input()
-    {
-
+        base.Die();
+        // Aquí puedes poner lógica extra cuando el Player muere (game over, animación, etc.)
+        Debug.Log("Game Over!");
     }
 }

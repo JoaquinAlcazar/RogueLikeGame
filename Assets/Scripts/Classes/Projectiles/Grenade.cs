@@ -13,7 +13,9 @@ public class Grenade : AProjectile
     public float launchForce;
 
     private Vector2 launchDirection;
-    // Start is called before the first frame update
+
+    public int explosionDamage = 80; // Daño de la explosión
+
     void Start()
     {
         gameObject.transform.SetParent(null);
@@ -35,7 +37,6 @@ public class Grenade : AProjectile
         StartCoroutine(Explode());
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (rb.velocity.magnitude < 0.1f && launchDirection != Vector2.zero)
@@ -48,10 +49,14 @@ public class Grenade : AProjectile
     IEnumerator Explode()
     {
         yield return new WaitForSeconds(3);
+
         spriteRenderer.sprite = null;
-        circleCollider.enabled = true;
+        circleCollider.enabled = true; // Activamos el trigger para detectar enemigos
         PlayExplosionClip();
+
+        // Esperamos un momento para que los OnTriggerEnter2D se procesen
         yield return new WaitForSeconds(0.6f);
+
         Destroy(gameObject);
     }
 
@@ -60,4 +65,16 @@ public class Grenade : AProjectile
         animator.SetTrigger("Explode");
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        EnemyHitbox hitbox = collision.GetComponent<EnemyHitbox>();
+        if (hitbox != null && hitbox.owner != null)
+        {
+            Debug.Log($"Grenade hit enemy: {hitbox.owner.gameObject.name}");
+
+            // Aplicar daño
+            hitbox.owner.TakeDamage(explosionDamage);
+            Debug.Log($"Grenade dealt {explosionDamage} damage to {hitbox.owner.gameObject.name}.");
+        }
+    }
 }

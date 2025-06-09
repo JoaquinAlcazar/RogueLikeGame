@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 62d33561b2000c8439b87606489d5ba1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - swordPrefab: {fileID: 3266322386587230973, guid: 72d1e29f07effc2438f5421a4e31e0eb, type: 3}
+  - sniperPrefab: {fileID: 5345061824352411333, guid: 57397dc3894d81c4795cca082aa1ad65, type: 3}
+  - grenadeLauncherPrefab: {fileID: 7145329918767952340, guid: e764cd8f419bb7142941a256669d0e85, type: 3}
+  - flamethrowerPrefab: {fileID: 5345061824352411333, guid: 83e98281b1916db43b9abffff61a6892, type: 3}
+  - weaponHolder: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

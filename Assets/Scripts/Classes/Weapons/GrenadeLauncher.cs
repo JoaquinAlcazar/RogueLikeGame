@@ -46,6 +46,7 @@ public class GrenadeLauncher : Weapon
     {
         instancia = Instantiate(grenade, gameObject.transform);
         instancia.transform.localScale = new Vector3(1,1,1);
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
     IEnumerator Cooldown ()

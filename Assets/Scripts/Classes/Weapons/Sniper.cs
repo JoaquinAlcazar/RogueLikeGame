@@ -9,11 +9,12 @@ public class Sniper : Weapon
     private SpriteRenderer spriteRenderer;
     private bool inCD;
     public int cdTime;
+    public float bulletOffset = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         inCD = false;
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -22,9 +23,23 @@ public class Sniper : Weapon
         base.Update();
     }
 
-    void Attack()
+    protected override void Attack()
     {
-        instancia = Instantiate(bullet, gameObject.transform);
-        instancia.transform.localScale = new Vector3(2, 2, 1);
+        Vector3 playerPosition = transform.parent.position; // El arma está en WeaponHolder hijo del player
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
+
+        Vector3 direction = (mousePosition - playerPosition).normalized;
+
+        Vector3 spawnPosition = playerPosition + direction * bulletOffset;
+
+        // Instancia el proyectil en la posición calculada
+        instancia = Instantiate(bullet, spawnPosition, Quaternion.LookRotation(Vector3.forward, direction));
+
+        // Ajusta la escala del proyectil si es necesario
+        instancia.transform.localScale = new Vector3(5, 5, 1);
+
+        gameObject.GetComponent<AudioSource>().Play();
     }
+
 }

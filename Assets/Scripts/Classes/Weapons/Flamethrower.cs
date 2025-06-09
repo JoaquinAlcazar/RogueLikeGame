@@ -5,6 +5,7 @@ using UnityEngine;
 public class Flamethrower : Weapon
 {
     private GameObject flames;
+    private bool sounding = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +23,14 @@ public class Flamethrower : Weapon
         if (Input.GetMouseButton(0))
         {
             flames.SetActive(true);
+            if (!sounding) gameObject.GetComponent<AudioSource>().Play();
+            sounding = true;
         }
         else
         {
             flames.SetActive(false);
+            if (sounding) gameObject.GetComponent<AudioSource>().Stop();
+            sounding = false;
         }
     }
 
@@ -36,6 +41,6 @@ public class Flamethrower : Weapon
 
     IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
     }
 }

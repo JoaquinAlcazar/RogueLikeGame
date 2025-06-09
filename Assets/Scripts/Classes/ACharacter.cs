@@ -1,40 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ACharacter : MonoBehaviour
 {
-    public int HP;
-    public int maxHP;
-    // Start is called before the first frame update
-    void Start()
+    [Header("Character Stats")]
+    public int maxHealth = 100;
+    protected int currentHealth;
+
+    protected virtual void Start()
     {
-        
+        currentHealth = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void TakeDamage(int damage)
     {
-        
+        currentHealth -= damage;
+        Debug.Log($"{gameObject.name} took {damage} damage. Current health: {currentHealth}");
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
-    void Death()
+    protected virtual void Die()
     {
-
+        Debug.Log($"{gameObject.name} died.");
+        Destroy(gameObject);
     }
 
-    void Hurt()
+    public int GetCurrentHealth()
     {
-
+        return currentHealth;
     }
 
-    void Movement() 
-    { 
-    
-    }
-
-    void Animations()
+    public int GetMaxHealth()
     {
-
+        return maxHealth;
     }
 }
