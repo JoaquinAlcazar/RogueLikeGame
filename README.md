@@ -24,16 +24,16 @@ Note: The camera was supposed to be centered in the room the player was standing
 The game contains 2 types of enemies  
 
 Suicide Enemy (the red one): This enemy approaches the player and once it's close enough, stops for 2 seconds and detonates (no VFX tho')  
-Turret Enemy (the green one): This enemy approaches the enemy and when it's at a certain range, stops and starts throwing bullets at the player, when player leaves this range, this enemy follows the player  
+Turret Enemy (the green one): This enemy approaches the player and when it's at a certain range, stops and starts throwing bullets at the player, when player leaves this range, this enemy follows the player  
   
   
 ## Weapons
 The game has 4 weapons for playing  
   
 Sniper: This weapon fires a straight bullet very fast  
-Flamethrower: Creates an area in front of it that damages enemies within it  
+Flamethrower: Creates an area in front of it that damages enemies within it periodically  
 Grenade Launcher: Throws a projectile that explodes some time after being thrown  
 Sword: Damages enemies on contact  
   
-Note: Sniper instantiates bullets but they instantly despawn. It should not collide with anything else but they still despawn. Also, weapons normal one shot enemies, not because they are overpowered, but because for some reason, enemies get damaged more than once every frame.  
+Note: Sniper instantiates bullets but they instantly despawn. It should not collide with anything else but they still despawn. Also, weapons normally one shot enemies, not because they are overpowered, but because for some reason, enemies get damaged more than once every frame.  
 Note 2: Couldn't do a store to buy the weapons  
